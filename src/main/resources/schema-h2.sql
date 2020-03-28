@@ -1,4 +1,6 @@
-CREATE TABLE cities(
+CREATE TABLE users(
 id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(255),
-population INT);
+phoneNumber VARCHAR(255),
+phoneOperator VARCHAR(255),
+balance INT);

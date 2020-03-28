@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.epam.learn</groupId>
-	<artifactId>spring-task1</artifactId>
+	<artifactId>spring-task3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>spring-task1</name>
-	<description>Project for Spring Boot - spring-task1</description>
+	<name>spring-task3</name>
+	<description>Project for Spring Boot - spring-task3</description>
 
 	<properties>
 		<java.version>1.8</java.version>
