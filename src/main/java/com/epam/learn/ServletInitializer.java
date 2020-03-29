@@ -25,6 +25,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 		return transactionManager;
 	}
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(SpringTask3Application.class);

@@ -6,14 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public class UsersService implements IUsersService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserAccount> findAll() {
 
         String sql = "SELECT * FROM users";
@@ -21,6 +25,7 @@ public class UsersService implements IUsersService {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
+    @Transactional(readOnly = true)
     public List<UserAccount> findUserByName(String name) {
 
         String sql = "SELECT * FROM users WHERE name='" + name + "'";
@@ -28,6 +33,7 @@ public class UsersService implements IUsersService {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
+    @Transactional(readOnly = true)
     public List<UserAccount> findUserByNameExcludingId(String name, String id) {
 
         String sql = "SELECT * FROM users WHERE name='" + name + "' AND id <> '" + id +"'";
@@ -35,13 +41,7 @@ public class UsersService implements IUsersService {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
-//    public String findUserIdByName(String Name) {
-//
-//        String sql = "SELECT name FROM users WHERE id='" + id + "'";
-//
-//        return jdbcTemplate.queryForObject(sql,String.class);
-//    }
-
+    @Transactional(readOnly = true)
     public String findUserNameById(String id) {
 
         String sql = "SELECT name FROM users WHERE id='" + id + "'";
@@ -49,6 +49,7 @@ public class UsersService implements IUsersService {
         return jdbcTemplate.queryForObject(sql,String.class);
     }
 
+    @Transactional(readOnly = true)
     public Integer findUserBalanceById(String id) {
 
         String sql = "SELECT balance FROM users WHERE id='" + id + "'";
@@ -56,6 +57,7 @@ public class UsersService implements IUsersService {
         return jdbcTemplate.queryForObject(sql,Integer.class);
     }
 
+    @Transactional
     public void transferMoney(int idFrom, int idTo, int amount) {
 
         String sqlFrom = "SELECT balance FROM users WHERE id='" + idFrom + "'";
@@ -69,12 +71,14 @@ public class UsersService implements IUsersService {
 
         String sqlDeduct = "UPDATE users SET balance = " + newAmountOfOldAccount + " WHERE id=" + idFrom + ";";
         jdbcTemplate.update(sqlDeduct);
+        System.out.println("transferMoney sqlDeduct SUCCESSFUL = " + sqlDeduct);
 
         String sqlAdd = "UPDATE users SET balance = " + newAmountOfNewAccount + " WHERE id=" + idTo + ";";
         jdbcTemplate.update(sqlAdd);
+        System.out.println("transferMoney sqlAdd SUCCESSFUL = " + sqlAdd);
     }
 
-
+    @Transactional
     public void deductFee(int idFrom, int amount) {
 
         String sqlFrom = "SELECT balance FROM users WHERE id='" + idFrom + "'";
@@ -89,7 +93,7 @@ public class UsersService implements IUsersService {
 
         String sqlDeduct = "UPDATE users SET balance = " + newAmountOfOldAccount + " WHERE id=" + idFrom + ";";
         jdbcTemplate.update(sqlDeduct);
-        System.out.println("sqlDeduct SUCCESSFUL = " + sqlDeduct);
+        System.out.println("deductFee sqlDeduct SUCCESSFUL = " + sqlDeduct);
     }
 }
 

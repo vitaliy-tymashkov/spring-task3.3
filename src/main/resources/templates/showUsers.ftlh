@@ -35,7 +35,7 @@
         </table>
     </div>
                         <div class="footer" align="center">
-                                <p><a href="/">Home Page</a>
+                            <p><a href="users">List of Users</a>
                         </div>
     </body>
 </html>

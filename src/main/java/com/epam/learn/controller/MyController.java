@@ -103,6 +103,9 @@ public class MyController {
         HashMap<String, Object> params = new HashMap<>();
         params.put("users", users);
         params.put("userName", name);
+        params.put("userIdFrom", idFromInt);
+        params.put("to", idToInt);
+
         params.put("operator", operator);
         params.put("balance", amount-TRANSFER_FEE);
         params.put("transferFeeMessage", transferFeeMessage);

@@ -35,9 +35,11 @@
                     <td>${user.balance}</td>
                     <td>
                             <#if operationApproved>
-                             <a href="updateBalance?userId=${user.id}&from=xxx&to=yyy&sum=${balance}">Transfer to ${user.phoneOperator} account</a>
+                             <!--a href="updateBalance?userId=${user.id}&from=xxx&to=yyy&sum=${balance}">Transfer to ${user.phoneOperator} account</a-->
+                             <a href="updateBalance?from=${userIdFrom}&to=${user.id}&operator=${operator}">Transfer to ${user.phoneOperator} account</a>
                             <#else>
-                            <a href="updateBlocked?userId=${user.id}&from=xxx&to=yyy&sum=${balance}">Transfer is blocked - not enough money</a>
+                            <!--a href="updateBlocked?userId=${user.id}&from=xxx&to=yyy&sum=${balance}">Transfer is blocked - not enough money</a-->
+                            <b>Transfer is blocked - not enough money</b>
                             </#if>
                     </td>
                 </tr>
@@ -46,7 +48,7 @@
     </div>
 
                     <div class="footer" align="center">
-                            <p><a href="/">Home Page</a>
+                            <p><a href="users">List of Users</a>
                     </div>
     </body>
 </html>
