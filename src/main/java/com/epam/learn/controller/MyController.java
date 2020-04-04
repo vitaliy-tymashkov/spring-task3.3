@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +30,36 @@ public class MyController {
 
     @GetMapping(value="/users")
     public ModelAndView showUsers() {
+
+        List<UserAccount> users = usersService.findAll();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("users", users);
+
+        return new ModelAndView("showUsers", params);
+    }
+    @GetMapping(value="/editUser")
+    public ModelAndView editUser(@RequestParam String userId) {
+
+        UserAccount user = usersService.findUserById(userId);
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("user", user);
+
+        return new ModelAndView("editUser", params);
+    }
+
+    @PostMapping(value="/editUser")
+    public ModelAndView editUserPost(@RequestParam String fid, @RequestParam String fname, @RequestParam String fnumber, @RequestParam String fcompany, @RequestParam String fbalance) {
+
+        UserAccount userAccount = new UserAccount();
+        userAccount.setName(fname);
+        userAccount.setPhoneNumber(fnumber);
+        userAccount.setPhoneOperator(fcompany);
+        userAccount.setBalance(Integer.valueOf(fbalance.replaceAll("[^\\d]", "")));
+
+
+        usersService.updateUser(Integer.valueOf(fid), userAccount);
 
         List<UserAccount> users = usersService.findAll();
 

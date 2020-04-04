@@ -37,7 +37,8 @@
                             <#if operationApproved>
                              <a href="updateBalance?from=${userIdFrom}&to=${user.id}&operator=${operator}">Transfer to ${user.phoneOperator} account</a>
                             <#else>
-                            <a href="updateBlocked?from=${userIdFrom}&to=${user.id}&operator=${operator}">Transfer is blocked - not enough money</a>
+                            <!--a href="updateBlocked?from=${userIdFrom}&to=${user.id}&operator=${operator}">Transfer is blocked - not enough money</a-->
+                            Transfer is blocked - not enough money
                             </#if>
                     </td>
                 </tr>

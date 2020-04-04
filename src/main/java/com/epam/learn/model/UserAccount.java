@@ -55,7 +55,7 @@ public class UserAccount {
     }
 
     public int getBalance() {
-        return balance;
+        return this.balance;
     }
 
     @XmlElement

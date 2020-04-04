@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Users</title>
+        <title>Edit User</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
         </head>
     <body>
     <div align='center'>
-        <h2>List of users</h2>
+        <h2>Edit user</h2>
+<form action="editUser" method="post">
 
         <table border=1>
             <tr>
@@ -17,30 +18,28 @@
                 <th>Phone Number</th>
                 <th>Phone Operator</th>
                 <th>Balance</th>
-                <th>Control</th>
-                <th>REST - SHOW</th>
-                <th>REST - EDIT page</th>
             </tr>
 
-            <#list users as user>
                 <tr>
                     <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.phoneNumber}</td>
-                    <td>${user.phoneOperator}</td>
-                    <td>${user.balance}</td>
+                    <input type="hidden" id="fid" name="fid" value="${user.id}">
                     <td>
-                        <a href="changeOperator?userId=${user.id}&operator=${user.phoneOperator}">Change ${user.name}'s ${user.phoneOperator} operator</a>
+                    <input type="text" id="fname" name="fname" value="${user.name}">
                     </td>
                     <td>
-                    <a href="api/user/${user.id}"> REST API - Show USER ${user.name}</a>
+                    <input type="text" id="fnumber" name="fnumber" value="${user.phoneNumber}">
                     </td>
                     <td>
-                    <a href="editUser?userId=${user.id}"> Edit USER ${user.name}</a>
+                    <input type="text" id="fcompany" name="fcompany" value="${user.phoneOperator}">
+                    </td>
+                    <td>
+                    <input type="text" id="fbalance" name="fbalance" value="${user.balance}">
                     </td>
                 </tr>
-            </#list>
+
         </table>
+<input type="submit" value="Update">
+</form>
     </div>
 
 

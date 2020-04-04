@@ -53,12 +53,20 @@ public class UsersService implements IUsersService {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
+//    @Transactional(readOnly = true)
+//    public UserAccount findUserById(String userId) {
+//
+//        String sql = "SELECT * FROM users WHERE id='" + userId + "'";
+//
+//        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(UserAccount.class));
+//    }
+
     @Transactional(readOnly = true)
     public UserAccount findOneUserByName(String name) {
 
         String sql = "SELECT DISTINCT * FROM users WHERE name='" + name + "' LIMIT 1";
 
-        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(UserAccount.class));
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
     @Transactional(readOnly = true)
@@ -131,6 +139,20 @@ public class UsersService implements IUsersService {
         jdbcTemplate.update(sqlDeduct);
         System.out.println("deductFee sqlDeduct SUCCESSFUL = " + sqlDeduct);
     }
+
+    @Transactional
+    public void updateUser(int id, UserAccount userAccount) {
+
+        String update = "UPDATE users SET " +
+                " name = '" + userAccount.getName() + "'," +
+                " phoneNumber = '" + userAccount.getPhoneNumber() + "'," +
+                " phoneOperator = '" + userAccount.getPhoneOperator() + "'," +
+                " balance = " + userAccount.getBalance() +
+                " WHERE id=" + id + ";";
+        jdbcTemplate.update(update);
+        System.out.println("update user SUCCESSFUL");
+    }
+
 
     @Override
     public void addUser(UserAccount userAccount) {

@@ -16,5 +16,8 @@ public interface IUsersService {
     void deductFee(int idFrom, int amount);
 
     void addUser(UserAccount userAccount);
+
+    UserAccount findUserById(String userId);
+    void updateUser(int id, UserAccount userAccount);
 }
 
