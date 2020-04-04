@@ -1,4 +1,4 @@
-#Spring Advanced #57 Task 3
+#Spring Advanced #57 Task 4
 
 Transactions
 
@@ -16,4 +16,13 @@ http://zetcode.com/articles/springbootpdfreport/
 https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
 
 
+##PDF with itextpdf
+https://www.logicbig.com/tutorials/spring-framework/spring-web-mvc/pdf-view.html
 
+
+##PDF with HMC
+https://www.logicbig.com/tutorials/spring-framework/spring-web-mvc/custom-http-message-converter.html
+
+
+##PDF - Spring MVC
+https://www.tutorialspoint.com/springmvc/springmvc_pdf.htm

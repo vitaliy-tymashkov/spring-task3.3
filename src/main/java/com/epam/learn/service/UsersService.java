@@ -1,7 +1,9 @@
 package com.epam.learn.service;
 
+import java.awt.*;
 import java.util.List;
 import com.epam.learn.model.UserAccount;
+import com.epam.learn.util.Checker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,11 +28,37 @@ public class UsersService implements IUsersService {
     }
 
     @Transactional(readOnly = true)
+    public List<UserAccount> findAllEnhanced(String order, String paginationFrom, String paginationTo) {
+        String limitClause = "";
+        if (paginationFrom != null) {
+            limitClause = " LIMIT " + Checker.checkPaginationValue(paginationFrom);
+
+            if (paginationTo != null){
+                limitClause = limitClause + " OFFSET " + Checker.checkPaginationValue(paginationTo);
+            }
+        }
+
+
+        String sql = "SELECT * FROM users ORDER BY id " + order + limitClause;
+        System.out.println("findAllEnhanced SQL = " + sql);
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserAccount.class));
+    }
+
+    @Transactional(readOnly = true)
     public List<UserAccount> findUserByName(String name) {
 
         String sql = "SELECT * FROM users WHERE name='" + name + "'";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserAccount.class));
+    }
+
+    @Transactional(readOnly = true)
+    public UserAccount findOneUserByName(String name) {
+
+        String sql = "SELECT DISTINCT * FROM users WHERE name='" + name + "' LIMIT 1";
+
+        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
     @Transactional(readOnly = true)
@@ -47,6 +75,14 @@ public class UsersService implements IUsersService {
         String sql = "SELECT name FROM users WHERE id='" + id + "'";
 
         return jdbcTemplate.queryForObject(sql,String.class);
+    }
+
+    @Transactional(readOnly = true)
+    public UserAccount findUserById(String id) {
+
+        String sql = "SELECT * FROM users WHERE id='" + id + "'";
+
+        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(UserAccount.class));
     }
 
     @Transactional(readOnly = true)
@@ -94,6 +130,19 @@ public class UsersService implements IUsersService {
         String sqlDeduct = "UPDATE users SET balance = " + newAmountOfOldAccount + " WHERE id=" + idFrom + ";";
         jdbcTemplate.update(sqlDeduct);
         System.out.println("deductFee sqlDeduct SUCCESSFUL = " + sqlDeduct);
+    }
+
+    @Override
+    public void addUser(UserAccount userAccount) {
+        String sqlAdd = "INSERT INTO users (name, phoneNumber, phoneOperator, balance) VALUES (" +
+                //userAccount.getId().toString() + ", " +
+                "'" + userAccount.getName() + "', " +
+                "'" + userAccount.getPhoneNumber() + "', " +
+                "'" + userAccount.getPhoneOperator() + "', " +
+                userAccount.getBalance() +
+                ")";
+        jdbcTemplate.update(sqlAdd);
+        System.out.println("addUser sql = " + sqlAdd);
     }
 }
 

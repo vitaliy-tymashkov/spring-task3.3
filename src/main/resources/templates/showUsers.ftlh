@@ -18,6 +18,8 @@
                 <th>Phone Operator</th>
                 <th>Balance</th>
                 <th>Control</th>
+                <th>REST - SHOW</th>
+                <th>REST - EDIT page</th>
             </tr>
 
             <#list users as user>
@@ -30,12 +32,27 @@
                     <td>
                         <a href="changeOperator?userId=${user.id}&operator=${user.phoneOperator}">Change ${user.name}'s ${user.phoneOperator} operator</a>
                     </td>
+                    <td>
+                    <a href="api/user/${user.id}"> REST API - Show USER ${user.name}</a>
+                    </td>
+                    <td>
+                    <a href="editUser/${user.id}"> Edit USER ${user.name}</a>
+                    </td>
                 </tr>
             </#list>
         </table>
     </div>
+
+
+
                         <div class="footer" align="center">
+                            <p><a href="/">Home page</a>
                             <p><a href="users">List of Users</a>
                         </div>
+
+
+
+
+
     </body>
 </html>

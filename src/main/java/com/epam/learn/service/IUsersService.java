@@ -14,5 +14,7 @@ public interface IUsersService {
 
     void transferMoney(int idFrom, int idTo, int amount);
     void deductFee(int idFrom, int amount);
+
+    void addUser(UserAccount userAccount);
 }
 
