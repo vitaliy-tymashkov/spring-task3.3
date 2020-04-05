@@ -9,11 +9,11 @@
     <body>
         <div align='center'>
         <h2>Task 4 - Home Page</h2>
-        <a href="users">Show users</a>
-
-        <div>
-             <table border='1'>
-             <tr><td>
+        <p><a href="users">Show users</a>
+        <p>
+        <div align='center'>
+             <table border='1' width='800'>
+             <tr width=100%><td width=100%>
         <h2> REST </h2>
         <p><a href='/api/user/1'>Show 1st user</a>
         <p><a href='/api/user/all/ascending'>Show all users in ascending order</a>
@@ -25,38 +25,42 @@
         </div>
 
     <div align='center'>
-         <table border='1'>
+         <table border='1' width='800'>
          <tr><td>
     <h2> REST - ADD USER </h2>
     <p> <a href="addUser.html"> Add new user - using POSTMAN POST REQUEST</a>
     <p>
-    <p>Or use CURL:
-    <p>curl -d "{"""name""":"""Ivan""","""phoneNumber""":"""233234234""","""phoneOperator""":"""Orange""","""balance""":11110}" -H "Content-Type: application/json" -X POST http://localhost:8085/api/user/addUser
+    <p>Or use CURL:<p>
+<textarea rows = "5" cols = "100" name = "curl1" align='center'>
+curl -d "{"""name""":"""Ivan""","""phoneNumber""":"""233234234""","""phoneOperator""":"""Orange""","""balance""":11110}" -H "Content-Type: application/json" -X POST http://localhost:8084/api/user/addUser
+</textarea><br>
          </td></tr>
          </table>
     </div>
 
     <div align='center'>
-     <table border='1'>
+     <table border='1' width='800'>
     <tr><td>
     <h2> PDF resolver </h2>
         <p> <a href="/api/pdf/user_pdf"> Show list of user names</a>
 
     <p>
 
-    <p>Or use CURL:
-    <p>curl -H "Accept: application/pdf" -X GET http://localhost:8085/api/pdf/user_pdf
+    <p>Or use CURL:<p>
+<textarea rows = "5" cols = "100" name = "curl2" align='center'>
+curl -H "Accept: application/pdf" -X GET http://localhost:8084/api/pdf/user_pdf
+</textarea><br>
      </td></tr>
      </table>
     </div>
 
 
     <div align='center'>
-     <table border='1'>
+     <table border='1' width='800'>
          <tr><td>
          <h2> ContentNegotiationViewResolver via MVC namespace </h2>
-    <p> <a href="api/userCNVR/name/Leo"> Get XML for Leo</a>
-    <p> <a href="api/userCNVR/id/1"> Get XML for id=1</a>
+    <p> <a href="apiXML/userCNVR/name/Leo"> Get XML for Leo</a>
+    <p> <a href="apiXML/userCNVR/id/1"> Get XML for id=1</a>
     <p> <a href="api/pdf/all"> Get PDF for all users</a>
     </td></tr>
      </table>

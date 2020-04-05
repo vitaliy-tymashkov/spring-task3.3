@@ -30,27 +30,29 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value={"/all" , "/all/{order}","/all/{order}/{paginationFrom}","/all/{order}/{paginationFrom}/{paginationTo}"}, method=RequestMethod.GET)
     public List<UserAccount> findAllUsers(
-            @PathVariable("order") String order,
+            @PathVariable(name="order", required = false) String order,
             @PathVariable(name="paginationFrom", required = false) String paginationFrom,
             @PathVariable(name="paginationTo", required = false) String paginationTo){
 
-        if (order.equalsIgnoreCase("DESCENDING") ) {
-            return this.usersService.findAllEnhanced("DESC", paginationFrom, paginationTo);
-        } else {
-            return this.usersService.findAllEnhanced("ASC", paginationFrom, paginationTo);
+        if (order != null) {
+            if (order.equalsIgnoreCase("DESCENDING")) {
+                return this.usersService.findAllEnhanced("DESC", paginationFrom, paginationTo);
+            } else {
+                return this.usersService.findAllEnhanced("ASC", paginationFrom, paginationTo);
+            }
         }
+        return this.usersService.findAllEnhanced("ASC", paginationFrom, paginationTo);
     }
 
-//    @ResponseBody
-//    @RequestMapping(value="/all/descending", method=RequestMethod.GET)
-//    public List<UserAccount> findAllUsersDescending(){
-//
-//    }
+    @ResponseBody
+    @RequestMapping(value="/json/{id}}", method=RequestMethod.GET)
+    public UserAccount findOneUserJson(@PathVariable(name="id") String id){
+        System.out.println("findOneUserJson");
+        return this.usersService.findUserById(id);
+    }
 
     @PostMapping(path= "addUser", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserAccount> addUser(
-//            @RequestHeader(name = "X-COM-PERSIST", required = true) String headerPersist,
-//            @RequestHeader(name = "X-COM-LOCATION", defaultValue = "PL") String headerLocation,
             @RequestBody UserAccount userAccount
     )
             throws Exception
@@ -62,8 +64,6 @@ public class UserController {
         //add resource
         usersService.addUser(userAccount);
 
-        //Create resource location
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/api/user/{id}")
                 .buildAndExpand(userAccount.getId())
