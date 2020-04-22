@@ -142,6 +142,9 @@ public class UsersService implements IUsersService {
         System.out.println("deductFee sqlDeduct SUCCESSFUL = " + sqlDeduct);
     }
 
+    /**
+     * Attack vector = any text field - INSERT INTO
+     */
     @Transactional
     public void updateUser(int id, UserAccount userAccount) {
 

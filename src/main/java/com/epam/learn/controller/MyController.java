@@ -49,6 +49,9 @@ public class MyController {
         return new ModelAndView("editUser", params);
     }
 
+    /**
+     * Attack vector = any text field of UserAccount object - INSERT INTO
+     */
     @PostMapping(value="/editUser")
     public ModelAndView editUserPost(@RequestParam String fid, @RequestParam String fname, @RequestParam String fnumber, @RequestParam String fcompany, @RequestParam String fbalance) {
 
@@ -69,6 +72,7 @@ public class MyController {
 
         return new ModelAndView("showUsers", params);
     }
+
 
     @GetMapping(value="/changeOperator")
     public ModelAndView changeOperator(@RequestParam String userId, String operator) {

