@@ -52,6 +52,7 @@ public class MyController {
     @PostMapping(value="/editUser")
     public ModelAndView editUserPost(@RequestParam String fid, @RequestParam String fname, @RequestParam String fnumber, @RequestParam String fcompany, @RequestParam String fbalance) {
 
+        System.out.println("editUserPost = " + fid);
         UserAccount userAccount = new UserAccount();
         userAccount.setName(fname);
         userAccount.setPhoneNumber(fnumber);

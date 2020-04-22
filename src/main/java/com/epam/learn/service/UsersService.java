@@ -81,6 +81,7 @@ public class UsersService implements IUsersService {
     public String findUserNameById(String id) {
 
         String sql = "SELECT name FROM users WHERE id='" + id + "'";
+        System.out.println("findUserNameById sql = " + sql);
 
         return jdbcTemplate.queryForObject(sql,String.class);
     }
@@ -89,6 +90,7 @@ public class UsersService implements IUsersService {
     public UserAccount findUserById(String id) {
 
         String sql = "SELECT * FROM users WHERE id='" + id + "'";
+        System.out.println("findUserById sql = " + sql);
 
         return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(UserAccount.class));
     }
@@ -150,7 +152,7 @@ public class UsersService implements IUsersService {
                 " balance = " + userAccount.getBalance() +
                 " WHERE id=" + id + ";";
         jdbcTemplate.update(update);
-        System.out.println("update user SUCCESSFUL");
+        System.out.println("update user SUCCESSFUL. sql = " + update);
     }
 
 

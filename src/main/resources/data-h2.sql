@@ -6,3 +6,4 @@ INSERT INTO users(name, phoneNumber, phoneOperator, balance) VALUES('Misha', '23
 INSERT INTO users(name, phoneNumber, phoneOperator, balance) VALUES('Leo', '232342134', 'Orange', 80000);
 INSERT INTO users(name, phoneNumber, phoneOperator, balance) VALUES('Leo', '232341234', 'Play', 3000);
 INSERT INTO users(name, phoneNumber, phoneOperator, balance) VALUES('Leo', '232341234', 'Orange', 1000);
+INSERT INTO usersPasswords(name, password) VALUES('Leo', 'Password');

